@@ -23,7 +23,6 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    console.log(allcategories);
     setFilteredProducts(
       products.filter((item) =>
         item.title.toLowerCase().includes(search.toLowerCase())
@@ -31,14 +30,14 @@ const ProductList = () => {
     );
   }, [search, products]);
 
-  const filerProducts = (category) => {
-    if (category === "all") {
+  const filerProducts = (incomingcategory) => {
+    if (incomingcategory === "all") {
       setProducts(productData);
       return;
     }
 
     const newProducts = productData.filter(
-      (item) => item.category === category
+      (item) => item.category === incomingcategory
     );
     setProducts(newProducts);
   };

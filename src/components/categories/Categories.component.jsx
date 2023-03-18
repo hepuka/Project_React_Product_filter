@@ -1,8 +1,10 @@
 import React from "react";
 import "./Categories.css";
 
+/*a kategória első betűjét naggyá teszi a többit hozzárakja*/
+
 const capitalize = (word) => {
-  return word.charAt(0).toUppercase() + word.slice(1);
+  return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
 const Categories = ({ categories, filterItems }) => {
@@ -16,8 +18,7 @@ const Categories = ({ categories, filterItems }) => {
             key={index}
             onClick={() => filterItems(item)}
           >
-            {/* {capitalize(item)} */}
-            {item}
+            {capitalize(item)}
           </button>
         );
       })}

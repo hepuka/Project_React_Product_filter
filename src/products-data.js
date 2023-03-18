@@ -5,13 +5,17 @@ export const productData = [
     category: "Gown",
     price: 15.99,
     img: "/images/6.png",
-  },
-  {
-    id: 2,
     title: "Shirt Product",
     category: "Shirt",
     price: 15.99,
     img: "/images/7.png",
+  },
+  {
+    id: 2,
+    title: "Gown Product",
+    category: "Gown",
+    price: 15.99,
+    img: "/images/6.png",
   },
   {
     id: 3,

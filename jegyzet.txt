@@ -1,0 +1,34 @@
+Product komponens:
+
+- A komponens egy termék kártyáját tartalmazza
+- props-ként megkapja a title, img, price-t
+
+ProductList komponens:
+- adatbázis egy külső fájlban van
+- products state-be először a teljes adatbázist belerakjuk kezdőértékként. Mivel fájlban van nem kell külön függvény csak az adatbázist kell megadni kezdőértéknek.
+- a return részben egy sima map-el bajárom a tömböt és minden iterációban visszaadok egy Product komponenst
+
+Search komponens
+- a komponens input mezője szokásosan megkapja az ProductList komponenstől a value-t és az onChange függvényt
+- ProductList-ben készítünk egy state-t,majd a handleSearch függvénnyel a state változóba rakjuk az e.target.value-t
+- A ProductList komponensben a Search komponensnek átadjuk a search state változóját mint value és a handlsearch függvényt.
+
+Filter product
+
+Ha a search kész van akkor a search mezőbe beirtak alapján el lehet készíteni a filteredproduct state-et.
+- létrehozunk egy state-et a FilteredProduct néven
+- useeffect-ben használjuk a filterezést a search state tartalma lapján. A useEffect-ben a setFilteredProducts-ban a products változótra meghívjuk a filter metódust, majd az include metódusnak megadjuk a serach state változóját. Ez alapján filterez és adja vissza, hogy a serach tartalma alapján milyen névegyezőségek vannak a products-ban. Az ereedméyn a filteredProducts state változóba kerül.
+- előzőleg a teljes products-ot jártuk be és lsitáztuk ki az adatbázist, most ez kicseréljük a filteredProducts state változóra és csak a filterezés eredményét listázza ki.
+- Ha nincs találat akkor egy sima oldal jelenik meg, ami nem túl felhasználóbarát, így a map-elés előtt egy if-ben megvizsgááljuk, hogy ha a filteredProducts hossza nulla akkor írja ki, hogy nincs termék és a ternáris operátor másik ágába berakjuk a filterproducts kilistázását.
+
+Category filter
+- létrehozunk egy state-et a category-nak is
+- ProductList komponensen kívül az importok alatt létrehozunk egy allcategories tömböt, ami első elemének, megadjuk az "all" stringet majd másodikként létrehozunk egy new Set-et, amiben bejárjuk(map) az adatbázist(productData) és a map-elés minden elemének csak a categorí property-ét adom meg. 
+- Azért kell a Set mert az nem tartalmazhat duplikációt az elemekben, így ki tudjuk szedni az adatbázisból az összes kategórianevet.És ezek a kategórianvek lesznek a tömb további elemei
+- ezt az allcategories tömböt adjuk meg a category state kezdőértékének
+- A ProductList komponensben a Categories komponensnek átadjuk a categories state változót, és a filterProducts függvényt
+- A filterproducts függvényben kezdetben egy if-el megvizsgálom hogyha a kategóraia all akkor a setProducts-al rakja bele a products state változóba az adatbázis teljes tartalmát. Máskülönben létrehozunke gy változót amibe a productData-ra meghivjuk a filter metódust és mindenegyes iteráció elemének a category property-ét nézem meg, hogyha egyenlő az incomingcategory-val akkor a setProducts-al belerakom a products state változóba ezt a newProducts változót.
+
+Categories komponens
+- A komponens megkapja a categories és a filteredproduct-ot
+- Azért hogy a weboldalon megkapjuk a kategória gombokat, a komponenben map-eléssel bejárjuk a categories változót és mindenegyes iterációban visszaadok egy gombot. A gomb onclick metódusának megadom a bejövő filteredproduct függvényt és ennek a függvénynek megadom az éppen aktuális elemet(item).A gomb neve mega az item lesz.
